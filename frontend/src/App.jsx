@@ -1,4 +1,5 @@
-import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import React, { useCallback, useEffect, useMemo, useRef, useState } from "react";
+
 import {
   ArrowDownUp, ArrowLeft, ArrowRight, Bookmark, Check, ChevronDown, Compass,
   Globe2, Heart, Leaf, LoaderCircle, MapPin, Menu, Search, ShieldCheck,
