@@ -1,172 +1,211 @@
-# TripWise — Smart Travel Planner
-**Track:** 3 — Full-Stack Development  
-**Built with:** React, Vite, Node.js, Express, PostgreSQL, Wikimedia API
+<div align="center">
 
-TripWise lets users discover destinations from a real external API, search/filter/sort results, view destination details, and save or remove places from a persistent itinerary.
+# ✈️ TripWise
 
-## Architecture
-- `frontend/`: React + Vite responsive single-page application.
-- `backend/`: Express REST API, Wikimedia API integration, PostgreSQL persistence and request validation.
-- Wikimedia's public MediaWiki API supplies destination search results, descriptions, thumbnails and article links. No Wikimedia API key is required.
-- PostgreSQL stores itinerary items. A browser-generated trip ID separates one browser's itinerary from another's; it is not an authentication system.
+### Discover places. Design your journey. Keep every stop in one place.
 
-## Features
-- Destination discovery from Wikipedia/Wikimedia (real external API).
-- Search plus category filters and sorting.
-- Destination detail modal/page with image, description and source link.
-- Add, list and remove itinerary items, persisted in PostgreSQL.
-- Loading, empty, network-error and validation feedback.
-- Responsive desktop/mobile layout.
-- Health endpoint and basic API security/rate limiting.
-- API documentation below.
+**A full-stack travel discovery and itinerary planner built to make exploring the world feel effortless.**
 
-## Requirements
-- Node.js 20 or newer
-- PostgreSQL database (local PostgreSQL or hosted PostgreSQL such as Neon)
-- npm
+<p>
+  <a href="https://tripwise-frontend-omega.vercel.app/"><strong>🌐 Live Website</strong></a>
+  &nbsp; • &nbsp;
+  <a href="https://tripwise-backend-scl5.onrender.com/"><strong>⚙️ Backend API</strong></a>
+  &nbsp; • &nbsp;
+  <a href="https://github.com/sarkarkinjal0-ai/TripWise"><strong>💻 Source Code</strong></a>
+</p>
 
-## Run locally
+![Track](https://img.shields.io/badge/Track-Full--Stack-635BFF?style=for-the-badge)
+![Frontend](https://img.shields.io/badge/Frontend-React%20%2B%20Vite-61DAFB?style=for-the-badge&logo=react&logoColor=20232A)
+![Backend](https://img.shields.io/badge/Backend-Node.js%20%2B%20Express-339933?style=for-the-badge&logo=nodedotjs&logoColor=white)
+![Database](https://img.shields.io/badge/Database-Neon%20PostgreSQL-00E599?style=for-the-badge&logo=postgresql&logoColor=20232A)
 
-### 1. Configure PostgreSQL
-Create a database, for example `tripwise`. Set `DATABASE_URL` to your connection string.
+</div>
 
-### 2. Backend
-In the `backend` folder:
+---
+
+## 🌍 Project Overview
+
+TripWise is a full-stack travel discovery web application that helps users explore destinations and assemble a personal trip itinerary. Browse destination cards, search for places, narrow results by category, sort destinations alphabetically, open destination details, and add or remove places from **My Trip**.
+
+The application combines a responsive React interface with a Node.js/Express backend and a Neon-hosted PostgreSQL database. The frontend and backend are deployed separately for a live, accessible experience.
+
+> **Project submission**
+>
+> - **Register number:** `26BCE1313`
+> - **Chosen track:** Full Stack
+> - **Submission filename:** `26BCE1313_Full_Stack.pdf` *(for the required screenshots PDF)*
+
+## 🔗 Live Links
+
+| Resource | Link |
+|---|---|
+| **Live application** | [tripwise-frontend-omega.vercel.app](https://tripwise-frontend-omega.vercel.app/) |
+| **Backend deployment** | [tripwise-backend-scl5.onrender.com](https://tripwise-backend-scl5.onrender.com/) |
+| **Backend health check** | [Open `/health`](https://tripwise-backend-scl5.onrender.com/health) |
+| **GitHub repository** | [sarkarkinjal0-ai/TripWise](https://github.com/sarkarkinjal0-ai/TripWise) |
+
+The backend health endpoint has been tested and returned a healthy status with the database connected.
+
+## ✨ Features
+
+- **Explore destinations** — browse destination cards and images.
+- **Search** — find destinations by name.
+- **Category filters** — narrow results by categories such as City, Nature, Culture, and Landmark.
+- **Alphabetical sorting** — sort results A–Z or Z–A.
+- **Destination details** — view a destination's name, description, image, and related Wikipedia page.
+- **My Trip itinerary** — add destinations to an itinerary and remove them when plans change.
+- **Persistent itinerary experience** — itinerary entries remained available after refresh in the tested browser.
+- **Responsive UI** — desktop and mobile layouts for exploring and managing a trip.
+- **Backend health check** — verify API availability and database connectivity.
+
+## 🧰 Technology Stack
+
+| Layer | Technologies | Purpose |
+|---|---|---|
+| Frontend | React, Vite, JavaScript, CSS | Interactive, responsive user interface |
+| Backend | Node.js, Express.js | Server and API |
+| Database | PostgreSQL on Neon | Relational database service |
+| Destination content | Wikipedia API | Destination reference content and links |
+| Frontend hosting | Vercel | Live frontend deployment |
+| Backend hosting | Render | Live API deployment |
+
+## 🔌 API Details
+
+### Health check
+
+**Endpoint:** `GET https://tripwise-backend-scl5.onrender.com/health`
+
+Use this endpoint to check whether the backend is running and whether it can connect to the configured database.
+
+Example request:
+
 ```bash
-npm install
-```
-Copy `.env.example` to `.env`, then fill in `DATABASE_URL` and `FRONTEND_ORIGIN`.
-```bash
-npm run dev
-```
-The API runs at `http://localhost:5000`. On startup it creates the required table automatically.
-
-### 3. Frontend
-In a separate terminal, enter the `frontend` folder:
-```bash
-npm install
-```
-Copy `.env.example` to `.env` (the default points to the local backend).
-```bash
-npm run dev
-```
-Open the Vite URL printed in the terminal, usually `http://localhost:5173`.
-
-## Deployment
-
-### Database
-Create a PostgreSQL database with a provider such as Neon. Copy its connection string. Keep credentials private.
-
-### Backend (Render or another Node host)
-- Create a Web Service from the GitHub repository.
-- Root directory: `backend`
-- Build command: `npm install`
-- Start command: `npm start`
-- Add environment variables:
-  - `DATABASE_URL`: hosted PostgreSQL connection string
-  - `FRONTEND_ORIGIN`: deployed frontend origin, e.g. `https://your-site.vercel.app`
-  - `NODE_ENV`: `production`
-  - `PORT`: set automatically by many hosts; do not hard-code it
-- If your PostgreSQL provider requires TLS, the backend enables TLS for hosted database URLs.
-- After deploy, check `https://YOUR-BACKEND-URL/health`.
-
-### Frontend (Vercel or Netlify)
-- Import the same repository.
-- Root directory: `frontend`
-- Build command: `npm run build`
-- Output directory: `dist`
-- Add `VITE_API_BASE_URL` with your deployed backend URL, e.g. `https://your-api.onrender.com` (no trailing slash).
-- Redeploy after setting the environment variable.
-
-**Important:** the frontend URL and backend URL must be added to the correct environment variables. The backend CORS origin must exactly match your deployed frontend origin.
-
-## REST API
-
-All endpoints are prefixed with `/api`.
-
-### `GET /health`
-Returns service status and whether the database is reachable.
-Example response:
-```json
-{ "status": "ok", "database": "connected" }
+curl https://tripwise-backend-scl5.onrender.com/health
 ```
 
-### `GET /api/destinations?q=kyoto&category=all&sort=relevance&page=1&limit=12`
-Searches Wikimedia and returns normalized destination cards.
-- `q`: search phrase (optional; default search is travel destinations)
-- `category`: `all`, `city`, `nature`, `culture`, or `landmark`
-- `sort`: `relevance`, `name-asc`, or `name-desc`
-- `page`: positive integer
-- `limit`: 1–24
+Example successful response:
 
-Example response:
 ```json
 {
-  "items": [
-    {
-      "id": "Kyoto",
-      "title": "Kyoto",
-      "description": "Kyoto is a city in Japan...",
-      "image": "https://...",
-      "url": "https://en.wikipedia.org/wiki/Kyoto",
-      "category": "city",
-      "location": "Explore the world"
-    }
-  ],
-  "page": 1,
-  "limit": 12,
-  "total": 12,
-  "source": "Wikimedia"
+  "status": "ok",
+  "database": "connected"
 }
 ```
-`total` is the number of items returned by this API call, not a global count of all matching Wikipedia articles.
 
-### `GET /api/destinations/:title`
-Retrieves one article's details from Wikimedia. URL-encode the title.
+### Destination data
 
-### `GET /api/itinerary`
-Returns itinerary items for the browser's trip ID. Send `X-Trip-Id: <UUID>`.
+TripWise uses destination content associated with the Wikipedia API. Search, category filtering, and sorting are available through the application interface.
 
-### `POST /api/itinerary`
-Adds a destination to the itinerary. Send `X-Trip-Id: <UUID>` and JSON:
-```json
-{
-  "id": "Kyoto",
-  "title": "Kyoto",
-  "description": "A historic city in Japan.",
-  "image": "https://upload.wikimedia.org/...",
-  "url": "https://en.wikipedia.org/wiki/Kyoto",
-  "category": "city",
-  "location": "Japan"
-}
+> **API route note:** The health route above is verified. For any additional backend endpoints, request parameters, or response schemas, refer to the current source code in [`backend/src/index.js`](https://github.com/sarkarkinjal0-ai/TripWise/blob/master/backend/src/index.js) rather than assuming undocumented routes.
+
+## 🚀 Run Locally
+
+### Prerequisites
+
+Install:
+- [Node.js](https://nodejs.org/) (includes npm)
+- Git
+- Access to a PostgreSQL database, such as [Neon](https://neon.tech/)
+
+### 1. Clone the repository
+
+```bash
+git clone https://github.com/sarkarkinjal0-ai/TripWise.git
+cd TripWise
 ```
-Returns `201` when added, `409` if already saved, or `400` for invalid data.
 
-### `DELETE /api/itinerary/:title`
-Removes an item by URL-encoded Wikipedia title. Requires `X-Trip-Id`.
+### 2. Configure and start the backend
 
-## Submission checklist from the task PDF
-- [ ] Public GitHub repository with source code
-- [ ] Live deployed website and API
-- [ ] README with overview, track, technologies, API details, setup and database configuration
-- [ ] PDF screenshots of Explore, Destination Details, My Trip, and mobile views
-- [ ] Screenshots of search/filter results, populated itinerary, and empty state
-- [ ] Use required filename: `<register no>_fullstack.pdf` (confirm exact naming convention with the organizer if uncertain)
+```bash
+cd backend
+npm install
+```
 
-## Screenshot/PDF instructions
-After deploying or running locally, capture real screenshots of:
-1. Explore page with cards.
-2. Search/filter results.
-3. A destination detail view.
-4. My Trip with at least two saved places.
-5. My Trip empty state (remove all saved items).
-6. Mobile Explore view using browser device emulation.
-7. Mobile My Trip view.
+Create a local environment file using the variable names expected by the backend code and configure the PostgreSQL connection string. Then run the start script defined in `backend/package.json`.
 
-Put the screenshots into a document, export it as PDF, and use the required filename. Do not submit placeholder screenshots.
+For example, if the project defines a `start` script:
 
-## Notes and limitations
-- Wikimedia content is community-maintained; descriptions and images may vary by article.
-- Category filtering uses a transparent keyword-based heuristic over article titles and descriptions, not an authoritative taxonomy.
-- Trip IDs are anonymous browser identifiers, not secure user accounts. Do not store sensitive personal data.
-- Public API limits and availability may change; the UI displays errors when the external service is unavailable.
+```bash
+npm start
+```
+
+If it defines a development script instead, use the script listed in `backend/package.json`.
+
+### 3. Start the frontend
+
+Open a **second terminal** from the repository root:
+
+```bash
+cd frontend
+npm install
+npm run dev
+```
+
+Open the local URL printed by Vite in your terminal (commonly `http://localhost:5173`).
+
+### 4. Verify the backend
+
+Once the backend is running, open its `/health` endpoint or run:
+
+```bash
+curl http://localhost:<BACKEND_PORT>/health
+```
+
+Replace `<BACKEND_PORT>` with the port configured by the backend.
+
+## 🗄️ Database Configuration
+
+TripWise uses **PostgreSQL hosted on Neon**.
+
+1. Create or open a Neon project and copy its PostgreSQL connection string.
+2. Configure the backend's database connection using the environment-variable name expected by the source code.
+3. Keep credentials in a local environment file or your deployment provider's environment settings.
+4. For Render, add the database configuration under the backend service's environment variables.
+5. Redeploy the backend after changing deployment environment variables.
+6. Verify connectivity using `GET /health`.
+
+**Security:** Never commit `.env` files, database passwords, access tokens, or other secrets to GitHub. Keep a `.env.example` file with placeholder values only, if useful.
+
+## ☁️ Deployment
+
+| Component | Platform | Deployment |
+|---|---|---|
+| Frontend | Vercel | [Open live site](https://tripwise-frontend-omega.vercel.app/) |
+| Backend | Render | [Open backend](https://tripwise-backend-scl5.onrender.com/) |
+| Database | Neon | PostgreSQL service configured for the backend |
+
+If you fork or redeploy the project, configure the frontend's backend URL and the backend's allowed frontend origin for the new deployment domains.
+
+## 🧪 Validation Notes
+
+The deployed application has been manually tested for destination browsing, search, most category filters, alphabetical sorting, destination details, itinerary add/remove, persistence after refresh, responsive mobile views, and backend/database health.
+
+**Known limitation:** The Landmark filter displayed “No places found” when used without a search term during testing; searching for Eiffel Tower and selecting Landmark did return a result. This can be revisited in the category-classification logic.
+
+## 📁 Repository Structure
+
+```text
+TripWise/
+├── frontend/       # React + Vite application
+├── backend/        # Node.js + Express API
+└── README.md       # Project documentation
+```
+
+*This is a high-level overview; consult the repository for the complete file structure.*
+
+## 👤 Project Information
+
+**Project:** TripWise  
+**Track:** Full Stack  
+**Register Number:** `26BCE1313`  
+**Repository:** [github.com/sarkarkinjal0-ai/TripWise](https://github.com/sarkarkinjal0-ai/TripWise)
+
+---
+
+<div align="center">
+
+**Made for curious travelers — one destination at a time.** 🌎
+
+[Explore TripWise](https://tripwise-frontend-omega.vercel.app/) · [View Source Code](https://github.com/sarkarkinjal0-ai/TripWise)
+
+</div>
