@@ -180,8 +180,6 @@ If you fork or redeploy the project, configure the frontend's backend URL and th
 
 The deployed application has been manually tested for destination browsing, search, most category filters, alphabetical sorting, destination details, itinerary add/remove, persistence after refresh, responsive mobile views, and backend/database health.
 
-**Known limitation:** The Landmark filter displayed “No places found” when used without a search term during testing; searching for Eiffel Tower and selecting Landmark did return a result. This can be revisited in the category-classification logic.
-
 ## 📁 Repository Structure
 
 ```text
